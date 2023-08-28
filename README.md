@@ -38,3 +38,31 @@ policy-as-code tools.
   resources.
 
 ## See the demo in GitHub Actions
+
+The GitHub Actions runs representing `main`'s [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) show successful...
+
+1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
+1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
+1. :white_check_mark: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+
+The GitHub Actions runs representing [PR TODO's CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) shows similarly successful...
+
+1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
+1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
+1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+
+By contrast, PR TODO introduces a change that yields a destructive Terraform actions. A such, the GitHub Actions runs representing [PR TODO's CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) shows...
+
+1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
+1. :x: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
+1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+
+## Run the code locally
+
+Alternatively, you can run the demo locally.
+
+### Install dependencies
+
+The demo assumes you've installed [tfenv](https://github.com/tfutils/tfenv) and [Go](https://go.dev/).
+
+The demo also assumes [Docker](https://www.docker.com/) is installed and running.
