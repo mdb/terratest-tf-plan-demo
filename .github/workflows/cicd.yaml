@@ -1,0 +1,86 @@
+name: CI/CD
+
+on: [push, pull_request]
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up tfenv
+        uses: rhythmictech/actions-setup-tfenv@v0.1.2
+
+      - name: Use tfenv to install required Terraform version
+        run: make tfenv
+
+      - name: Start localstack mock AWS environment
+        run: make up
+
+      - name: Pre-populate s3://terratest-demo/terraform.tfstate remote state
+        run: make bootstrap
+
+      - name: Terraform plan
+        run: make plan
+
+      - name: Show Terraform plan and output to JSON
+        run: make show
+
+      - name: Upload Terraform plan.out and plan.json files as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: plan
+          path: plan*
+
+  test-terraform-plan:
+    needs: terraform-plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download Terraform plan
+        uses: actions/download-artifact@v3
+        with:
+          name: plan
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: test/go.mod
+          cache-dependency-path: test/go.sum
+
+      - name: Test Terraform plan for problematic changes
+        run: make test
+
+  terraform-apply:
+    if: github.ref == 'refs/heads/main'
+    needs: test-terraform-plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up tfenv
+        uses: rhythmictech/actions-setup-tfenv@v0.1.2
+
+      - name: Use tfenv to install required Terraform version
+        run: make tfenv
+
+      - name: Start localstack mock AWS environment
+        run: make up
+
+      - name: Pre-populate s3://terratest-demo/terraform.tfstate remote state
+        run: make bootstrap
+
+      - name: Download Terraform plan
+        uses: actions/download-artifact@v3
+        with:
+          name: plan
+
+      - name: Apply Terraform plan
+        run: make apply
