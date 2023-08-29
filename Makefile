@@ -54,6 +54,7 @@ state:
 
 demo:
 	vhs < demo.tape
+	git checkout .
 .PHONY: demo
 
 clean:

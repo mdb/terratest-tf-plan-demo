@@ -18,6 +18,8 @@ policy-as-code tools.
 
 `terratest-tf-plan-demo` demos such `terratest`-based Terraform plan testing.
 
+![demo](demo.gif)
+
 ## See the demo in GitHub Actions
 
 The [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) running against the `main` branch is composed of three jobs, each of which succeeds:
