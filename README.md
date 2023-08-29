@@ -43,19 +43,19 @@ The GitHub Actions runs representing `main`'s [CI/CD pipeline](https://github.co
 
 1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
 1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
-1. :white_check_mark: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+1. :white_check_mark: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, , as well the configuration specifying this job only run on the `main` branch.
 
-The GitHub Actions runs representing [PR TODO's CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) shows similarly successful...
+[PR 2](https://github.com/mdb/terratest-tf-plan-demo/pull/2) introduces a change that passes [GitHub Actions CI](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711), as its resulting Terraform plan includes no destructive actions...
 
-1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
-1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
-1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711/job/16290249080?pr=2)
+1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711/job/16290272192?pr=2) gated by `terraform-plan`'s success.
+1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711/job/16290276703?pr=2) gated by `test-terraform-plan`'s succcess,  as well the configuration specifying this job only run on the `main` branch.
 
-By contrast, PR TODO introduces a change that yields a destructive Terraform actions. A such, the GitHub Actions runs representing [PR TODO's CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) shows...
+By contrast, [PR 1](https://github.com/mdb/terratest-tf-plan-demo/pull/1) introduces a change whose Terraform plan indicates a destructive action. A such, its [GitHub Actions CI](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371) fails...
 
-1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
-1. :x: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
-1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the requirement that the branch is `main`.
+1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371/job/16290245262?pr=1)
+1. :x: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371/job/16290271949?pr=1) gated by `terraform-plan`'s success.
+1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371/job/16290277863?pr=1) gated by `test-terraform-plan`'s succcess, as well the configuration specifying this job only run on the `main` branch.
 
 ## Run the code locally
 
