@@ -18,25 +18,6 @@ policy-as-code tools.
 
 `terratest-tf-plan-demo` demos such `terratest`-based Terraform plan testing.
 
-## Overview
-
-* `docker-compose.yaml` creates a local
-  [localstack](https://localstack.cloud/)-based mock AWS environment.
-* `bootstrap` is a minimal Terraform project that creates a [localstack](https://localstack.cloud/)
-  `terratest-demo` S3 bucket, and seeds the bucket with a
-  `s3://terratest-demo/terraform.tfstate` Terraform state.
-* The repo's root directory homes a Terraform project using
-  `s3://terratest-demo/terraform.tfstate` as its remote state backend. The
-  project manages 3 resources:
-    * `resource.null_resource.foo`
-    * `resource.null_resource.bar`
-    * `resource.null_resource.baz`
-* `test` homes a simple `terratest` test that fails if a Terraform plan
-  indicates any destructive actions against any of the resources managed by the
-  root directory Terraform project.
-* The `Makefile` homes convenience utilities for creating and interacting with the demo
-  resources.
-
 ## See the demo in GitHub Actions
 
 The [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) running against the `main` branch is composed of three jobs, each of which succeeds:
