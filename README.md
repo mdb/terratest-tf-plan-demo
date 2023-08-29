@@ -6,7 +6,7 @@ Terraform plan output and gate `apply` in a CI/CD pipeline accordingly.
 ## More detailed problem statement
 
 Tools like [OPA](https://mikeball.info/blog/terraform-plan-validation-with-open-policy-agent/)
-can automate Terraform plan analysis. But what if your teamprefers to write Go?
+can automate Terraform plan analysis. But what if your team prefers to write Go?
 
 Traditionally, [terratest](https://terratest.gruntwork.io/) is leveraged a Terraform
 end-to-end test framework of sorts, enabling engineers to make post-`terraform apply`
