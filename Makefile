@@ -52,6 +52,10 @@ state:
 	curl http://s3.localhost.localstack.cloud:4566/terratest-demo/terraform.tfstate
 .PHONY: state
 
+demo:
+	vhs < demo.tape
+.PHONY: demo
+
 clean:
 	rm -rf bootstrap/.terraform || true
 	rm bootstrap/terraform.tfstate* || true
