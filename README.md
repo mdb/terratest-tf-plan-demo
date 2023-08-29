@@ -1,4 +1,4 @@
-# terratest-demo
+# terratest-tf-plan-demo
 
 A demo illustrating how [terratest](https://terratest.gruntwork.io/) can be used to programmatically analyze
 Terraform plan output and gate `apply` in a CI/CD pipeline accordingly.
@@ -39,11 +39,11 @@ policy-as-code tools.
 
 ## See the demo in GitHub Actions
 
-The GitHub Actions runs representing `main`'s [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) show successful...
+The [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774) running against the `main` branch is composed of three jobs, each of which succeeds:
 
 1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284431393)
 1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284476716) gated by `terraform-plan`'s success.
-1. :white_check_mark: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, , as well the configuration specifying this job only run on the `main` branch.
+1. :white_check_mark: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6004252774/job/16284486218) gated by `test-terraform-plan`'s succcess, as well the configuration specifying this job only run on the `main` branch.
 
 [PR 2](https://github.com/mdb/terratest-tf-plan-demo/pull/2) introduces a change that passes [GitHub Actions CI](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711), as its resulting Terraform plan includes no destructive actions...
 
