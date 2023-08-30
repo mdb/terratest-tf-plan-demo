@@ -52,7 +52,7 @@ The `main` branch [CI/CD pipeline](https://github.com/mdb/terratest-tf-plan-demo
 1. :white_check_mark: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711/job/16290272192?pr=2) - runs the `terratest` tests homed in `test/*_test.go` against the plan produced by the preceding job.
 1. :raised_hand: [terraform-apply](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006175711/job/16290276703?pr=2) - gated by `test-terraform-plan`'s succcess, as well the configuration specifying this job only run on the `main` branch (the workflow is running against a non-`main` branch so this job doesn't run).
 
-By contrast, [PR 1](https://github.com/mdb/terratest-tf-plan-demo/pull/1) introduces a change whose Terraform plan indicates a destructive action. A such, its [GitHub Actions CI](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371) fails its `test-terraform-plan` job:
+By contrast, [PR 1](https://github.com/mdb/terratest-tf-plan-demo/pull/1) introduces a change whose Terraform plan indicates a destructive action. As such, its [GitHub Actions CI](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371) fails its `test-terraform-plan` job:
 
 1. :white_check_mark: [terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371/job/16290245262?pr=1) - plans the configuration successfully.
 1. :x: [test-terraform-plan](https://github.com/mdb/terratest-tf-plan-demo/actions/runs/6006174371/job/16290271949?pr=1) - runs the `terratest` tests homed in `test/*_test.go` against the plan produced by the preceding job. The tests fail in this case, because the plan introduces a destructive action.
