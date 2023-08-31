@@ -32,6 +32,17 @@ Example use cases:
   DNS-based blue/green deployment
 * ensure an ECR repository marked for destruction does not home OCI images used
   by active ECR task definitions
+* "shift left" on detecting problematic PagerDuty Terraform edits, as some
+  [terraform-provider-pagerduty](https://registry.terraform.io/providers/PagerDuty/pagerduty/latest/docs) errors don't reveal themselves
+  at `plan` time; they only occur during an attempt to `apply`. For example:
+
+  ```
+  Error: DELETE API call to https://api.pagerduty.com/users/12345 failed 400 Bad Request. Code: 0, Errors: [The user cannot be deleted as they have 1 incident. Please resolve the following incident to continue.], Message:
+  ```
+
+  In such instances, a `terratest` test of the Terraform plan produced by a pull
+  request CI build can use the PagerDuty API to evaluate whether a user-to-be-deleted
+  is assigned open incidents, in advance of merging the pull request and applying the plan.
 
 ## GitHub Actions
 
